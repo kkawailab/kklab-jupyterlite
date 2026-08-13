@@ -16,6 +16,25 @@
 
 作成したノートブックはブラウザのローカルストレージに保存されます（サーバーには送信されません）。
 
+## 収録チュートリアル
+
+[jupyterlite-tutorials](https://github.com/kkawailab/jupyterlite-tutorials) のノートブック集を収録しています（日本語）。
+詳しい学習パスはサイト内の `README.md` を参照してください。
+
+| ディレクトリ | 内容 |
+|---|---|
+| `jupyterlite/` | JupyterLite 入門・R カーネル練習 |
+| `numpy/` `pandas/` `matplotlib/` | 基礎ライブラリ（初級・中級） |
+| `seaborn/` `scipy/` `statsmodels/` | データ分析・統計 |
+| `sklearn/` | 機械学習 |
+| `folium/` `ipywidgets/` | 地図可視化・ウィジェット |
+| `exercises/` | 練習問題集（計 129 問） |
+
+## カーネル
+
+- **Python (Pyodide)** — ほとんどのノートブックで使用。`piplite.install()` / `%pip install` でパッケージ追加可
+- **R (xeus-r)** — `jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb` 用。`environment.yml` でビルド時に組み込み
+
 ## 仕組み
 
 - `main` ブランチへ push すると GitHub Actions（`.github/workflows/deploy.yml`）が起動

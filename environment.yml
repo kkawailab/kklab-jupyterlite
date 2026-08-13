@@ -1,0 +1,8 @@
+# jupyterlite-xeus がビルド時に読み込むカーネル環境定義
+# （jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb 用の R カーネル）
+name: xeus-kernels
+channels:
+  - https://repo.prefix.dev/emscripten-forge-dev
+  - https://repo.prefix.dev/conda-forge
+dependencies:
+  - xeus-r

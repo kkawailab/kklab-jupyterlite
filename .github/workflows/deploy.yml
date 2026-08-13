@@ -21,6 +21,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install micromamba (required by jupyterlite-xeus)
+        run: |
+          mkdir -p "$HOME/micromamba"
+          curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xj -C "$HOME/micromamba" bin/micromamba
+          echo "$HOME/micromamba/bin" >> "$GITHUB_PATH"
+
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
