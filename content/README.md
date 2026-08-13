@@ -249,14 +249,6 @@ pip install -U jupyterlab jupyterlite nbconvert
 jupyter lab <ファイル名>.ipynb
 ```
 
-### テストの実行
-
-```bash
-source .venv/bin/activate
-pip install pytest numpy pandas matplotlib seaborn scipy scikit-learn statsmodels
-python -m pytest tests/ -v
-```
-
 ---
 
 ## ライセンス・著者
