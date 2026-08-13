@@ -257,12 +257,6 @@ pip install pytest numpy pandas matplotlib seaborn scipy scikit-learn statsmodel
 python -m pytest tests/ -v
 ```
 
-### PDF ガイドブックの生成
-
-```bash
-lualatex guidebook.tex
-```
-
 ---
 
 ## ライセンス・著者
