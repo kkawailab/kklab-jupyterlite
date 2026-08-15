@@ -18,7 +18,7 @@
 
 ## 収録チュートリアル
 
-[jupyterlite-tutorials](https://github.com/kkawailab/jupyterlite-tutorials) のノートブック集を収録しています（日本語）。
+[kklab-jupyterlite-tutorials](https://github.com/kkawailab/kklab-jupyterlite-tutorials) のノートブック集を収録しています（日本語）。
 詳しい学習パスはサイト内の `README.md` を参照してください。
 
 | ディレクトリ | 内容 |
