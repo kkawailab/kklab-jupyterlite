@@ -1,0 +1,935 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+
+\usepackage{lmodern}
+\usepackage{luatexja-fontspec}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\geometry{
+  top=22mm,
+  bottom=24mm,
+  left=22mm,
+  right=22mm,
+  headheight=18pt
+}
+
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Noto Sans Mono CJK JP}
+\setmainjfont{Noto Serif CJK JP}
+\setsansjfont{Noto Sans CJK JP}
+\setmonojfont{Noto Sans Mono CJK JP}
+
+\definecolor{GuideBlue}{HTML}{155E75}
+\definecolor{GuideLightBlue}{HTML}{ECFEFF}
+\definecolor{GuideGreen}{HTML}{166534}
+\definecolor{GuideLightGreen}{HTML}{F0FDF4}
+\definecolor{GuideOrange}{HTML}{9A3412}
+\definecolor{GuideLightOrange}{HTML}{FFF7ED}
+\definecolor{GuideRed}{HTML}{991B1B}
+\definecolor{GuideLightRed}{HTML}{FEF2F2}
+\definecolor{GuideGray}{HTML}{475569}
+\definecolor{GuideLightGray}{HTML}{F8FAFC}
+
+\hypersetup{
+  unicode=true,
+  colorlinks=true,
+  linkcolor=GuideBlue,
+  urlcolor=GuideBlue,
+  citecolor=GuideGreen,
+  pdftitle={Kawai Lab JupyterLite 利用ガイド},
+  pdfauthor={河合勝彦},
+  pdfsubject={JupyterLiteと付属ノートブックの初心者向け利用方法},
+  pdfkeywords={JupyterLite, Python, R, Pyodide, 入門, LuaLaTeX}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\sffamily Kawai Lab JupyterLite 利用ガイド}
+\rhead{\sffamily\small 河合勝彦}
+\cfoot{\sffamily\small \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlist[itemize]{leftmargin=2em,itemsep=0.35em,topsep=0.5em}
+\setlist[enumerate]{leftmargin=2.4em,itemsep=0.55em,topsep=0.6em}
+\setlist[description]{leftmargin=3.2em,labelsep=0.8em,itemsep=0.45em}
+
+\newcommand{\menu}[1]{\textsf{\bfseries #1}}
+\newcommand{\keycap}[1]{%
+  \tcbox[
+    on line,
+    colback=GuideLightGray,
+    colframe=GuideGray!50,
+    boxrule=0.4pt,
+    arc=1.5pt,
+    left=3pt,right=3pt,top=1pt,bottom=1pt
+  ]{\sffamily\small #1}%
+}
+\newcommand{\filepath}[1]{\nolinkurl{#1}}
+\newcommand{\siteurl}{\url{https://kkawailab.github.io/kklab-jupyterlite/}}
+
+\newtcolorbox{pointbox}[1][ポイント]{
+  breakable,
+  enhanced,
+  colback=GuideLightBlue,
+  colframe=GuideBlue,
+  title={#1},
+  fonttitle=\sffamily\bfseries,
+  boxrule=0.7pt,
+  arc=2pt
+}
+\newtcolorbox{warningbox}[1][注意]{
+  breakable,
+  enhanced,
+  colback=GuideLightOrange,
+  colframe=GuideOrange,
+  title={#1},
+  fonttitle=\sffamily\bfseries,
+  boxrule=0.7pt,
+  arc=2pt
+}
+\newtcolorbox{successbox}[1][確認]{
+  breakable,
+  enhanced,
+  colback=GuideLightGreen,
+  colframe=GuideGreen,
+  title={#1},
+  fonttitle=\sffamily\bfseries,
+  boxrule=0.7pt,
+  arc=2pt
+}
+\newtcolorbox{errorbox}[1][エラーが出たら]{
+  breakable,
+  enhanced,
+  colback=GuideLightRed,
+  colframe=GuideRed,
+  title={#1},
+  fonttitle=\sffamily\bfseries,
+  boxrule=0.7pt,
+  arc=2pt
+}
+
+\lstdefinestyle{guidecode}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{GuideLightGray},
+  frame=single,
+  rulecolor=\color{GuideGray!35},
+  framesep=6pt,
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  tabsize=4
+}
+\lstset{style=guidecode}
+
+\renewcommand{\contentsname}{目次}
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\begin{titlepage}
+  \thispagestyle{empty}
+  \centering
+  \vspace*{24mm}
+  {\sffamily\bfseries\color{GuideBlue}\fontsize{26}{34}\selectfont
+    Kawai Lab JupyterLite\\[3mm]
+    利用ガイド\par}
+  \vspace{8mm}
+  {\Large ブラウザで学ぶPythonデータサイエンスとR統計\par}
+  \vspace{20mm}
+
+  \begin{tcolorbox}[
+    width=0.84\textwidth,
+    colback=GuideLightBlue,
+    colframe=GuideBlue,
+    boxrule=0.8pt,
+    arc=3pt
+  ]
+    \centering
+    このガイドは、Jupyterを初めて使う方が、\\
+    ページを開くところからノートブックの実行・保存・復旧まで、\\
+    手順を飛ばさず進められるように説明します。
+  \end{tcolorbox}
+
+  \vfill
+  \begin{tabular}{rl}
+    \textbf{著者：} & 河合勝彦\\[2mm]
+    \textbf{所属：} & 日本語LuaLaTeX\\[2mm]
+    \textbf{連絡先：} & \href{mailto:kkawai@econ.nagoya-cu.ac.jp}
+      {\nolinkurl{kkawai@econ.nagoya-cu.ac.jp}}\\[2mm]
+    \textbf{版：} & 2026年8月30日版
+  \end{tabular}
+  \vspace{18mm}
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\section{このガイドについて}
+
+\subsection{対象となる方}
+
+本書は、次のような方を主な対象にしています。
+
+\begin{itemize}
+  \item Python、R、Jupyter Notebookのいずれか、または全部を初めて使う方
+  \item ソフトウェアのインストールをせず、ブラウザだけで学習したい方
+  \item NumPy、pandas、可視化、統計、機械学習を順番に学びたい方
+  \item 授業や自習で配布されたノートブックを確実に実行したい方
+\end{itemize}
+
+キーボードとマウスの基本操作、Webページを開く操作ができれば始められます。
+Pythonや統計の予備知識は必須ではありません。
+
+\subsection{このガイドでできるようになること}
+
+最後まで読むと、次の操作を自分で行えるようになります。
+
+\begin{enumerate}
+  \item 公開されているJupyterLiteサイトをブラウザで開く。
+  \item 目的のノートブックを選び、セルを上から順に実行する。
+  \item 実行中、実行完了、エラーの違いを見分ける。
+  \item Python用カーネルとR用カーネルを正しく使い分ける。
+  \item 作業内容をブラウザに保存し、手元へバックアップする。
+  \item よくあるエラーを安全な順序で解決する。
+  \item 自分に合う学習コースと練習問題を選ぶ。
+\end{enumerate}
+
+\section{JupyterLiteとは}
+
+JupyterLiteは、JupyterLabに似た操作画面をWebブラウザ内で動かす仕組みです。
+このリポジトリでは、PythonはPyodide、Rはxeus-rというWebAssembly対応カーネルで動作します。
+
+\begin{pointbox}[通常のJupyterとの大きな違い]
+計算は大学やクラウドのサーバーではなく、原則として利用者のブラウザ内で行われます。
+そのため、専用サーバーへのログインやPythonの事前インストールは不要です。
+\end{pointbox}
+
+\subsection{利点}
+
+\begin{itemize}
+  \item URLを開くだけで学習を始められる。
+  \item Windows、macOS、Linuxなどで同じ教材を利用しやすい。
+  \item Pythonコードや入力したデータは、通常はブラウザ内で処理される。
+  \item 教材に必要なノートブックとサンプルデータが最初から用意されている。
+\end{itemize}
+
+\subsection{知っておくべき制約}
+
+\begin{itemize}
+  \item 初回起動やパッケージの読み込みには、少し時間がかかる。
+  \item すべてのPythonパッケージがPyodideに対応しているわけではない。
+  \item ブラウザを閉じても作業は残ることが多いが、ブラウザのデータを削除すると失われる。
+  \item 同じサイトでも、別のブラウザや別の端末から開くと保存内容は共有されない。
+  \item 大規模なデータや長時間の計算には向かない。
+\end{itemize}
+
+\begin{warningbox}[保存場所について]
+JupyterLiteの保存先はブラウザのローカルストレージです。
+大切な作業は、必ず\texttt{.ipynb}ファイルとしてダウンロードしてください。
+ブラウザ上で「保存した」だけでは、端末故障や閲覧データ削除への備えになりません。
+\end{warningbox}
+
+\section{初回利用前の準備}
+
+\subsection{ステップ1：利用するブラウザを決める}
+
+最新版に近いGoogle Chrome、Microsoft Edge、Firefox、Safariのいずれかを推奨します。
+授業でブラウザが指定されている場合は、その指定を優先してください。
+
+\begin{enumerate}
+  \item ブラウザを起動する。
+  \item ブラウザの更新が保留されていないか確認する。
+  \item プライベートブラウズやシークレットモードは、通常の学習では使わない。
+\end{enumerate}
+
+シークレットモードでは、終了時にJupyterLiteの保存内容が消える場合があります。
+
+\subsection{ステップ2：バックアップ用フォルダーを作る}
+
+端末の「ドキュメント」など、分かりやすい場所に
+\filepath{jupyterlite-work}というフォルダーを作成してください。
+ダウンロードしたノートブックは、このフォルダーに保存します。
+
+\subsection{ステップ3：通信環境を確認する}
+
+サイト本体、Python実行環境、追加パッケージを読み込むため、最初はインターネット接続が必要です。
+ページが途中で止まる場合は、通信が安定した場所で再試行してください。
+
+\section{サイトを開く}
+
+\subsection{ステップ1：公開URLへアクセスする}
+
+ブラウザのアドレス欄に次のURLを入力し、\keycap{Enter}を押します。
+
+\begin{center}
+  \Large\bfseries\siteurl
+\end{center}
+
+\subsection{ステップ2：読み込み完了を待つ}
+
+最初の表示には数秒から数十秒かかることがあります。
+画面の一部が白い間や、読み込み表示が動いている間は、何度も更新ボタンを押さずに待ってください。
+
+\subsection{ステップ3：画面の主要部分を確認する}
+
+JupyterLab風の画面が表示されたら、次の場所を確認します。
+
+\begin{description}
+  \item[上部メニュー] \menu{File}、\menu{Edit}、\menu{View}、\menu{Run}、
+    \menu{Kernel}などの操作メニュー。
+  \item[左側] ファイルブラウザー。教材のフォルダーやノートブックを選ぶ場所。
+  \item[中央] ノートブックやREADMEを表示して作業する場所。
+  \item[下部] カーネル名、実行状態、選択中のセルなどを示すステータス領域。
+\end{description}
+
+\begin{successbox}
+左側に\filepath{numpy}、\filepath{pandas}、\filepath{matplotlib}、
+\filepath{exercises}などのフォルダーが見えれば、教材の読み込みはできています。
+\end{successbox}
+
+\subsection{表示言語を日本語にしたい場合}
+
+画面が英語でもノートブックの内容は日本語です。
+UIの言語を変更できる環境では、
+\menu{Settings}（設定）から\menu{Language}を開き、日本語を選択します。
+反映のためページの再読み込みを求められたら、指示に従ってください。
+
+\section{最初のノートブックを実行する}
+
+最初は短い\filepath{intro.ipynb}で、開く・実行する・保存する流れを練習します。
+
+\subsection{ステップ1：intro.ipynbを開く}
+
+\begin{enumerate}
+  \item 左側のファイルブラウザーで\filepath{intro.ipynb}を探す。
+  \item ファイル名をダブルクリックする。
+  \item 中央にタブが開き、説明文とコードの枠が表示されるまで待つ。
+\end{enumerate}
+
+\subsection{ステップ2：セルの種類を見分ける}
+
+ノートブックは「セル」という小さな単位で構成されています。
+
+\begin{description}
+  \item[Markdownセル] 見出し、説明、数式、注意事項を表示するセル。
+  \item[コードセル] PythonやRのコードを実行するセル。左側に\texttt{[ ]:}が表示される。
+\end{description}
+
+\subsection{ステップ3：最初のコードセルを選ぶ}
+
+コードが書かれた枠の内側を一度クリックします。
+枠の左側や背景色が変われば、そのセルが選択されています。
+
+\subsection{ステップ4：セルを実行する}
+
+\keycap{Shift + Enter}を押します。
+これは「現在のセルを実行し、次のセルへ進む」という操作です。
+
+\begin{description}
+  \item[\texttt{[ ]:}] まだ実行されていない。
+  \item[\texttt{[*]:}] 実行中。完了するまで待つ。
+  \item[\texttt{[1]:}] 実行完了。数字はそのカーネルでの実行順序。
+\end{description}
+
+\begin{warningbox}[最初のパッケージ読み込み]
+\filepath{intro.ipynb}にはNumPyを準備するセルがあります。
+初回はパッケージの取得に時間がかかることがあります。
+\texttt{[*]:}の間は、同じセルを繰り返し実行しないでください。
+\end{warningbox}
+
+\subsection{ステップ5：残りを上から順に実行する}
+
+選択が次のセルへ移ったら、再び\keycap{Shift + Enter}を押します。
+ノートブックの末尾まで、説明を読みながら同じ操作を繰り返します。
+
+\begin{successbox}[成功の目印]
+計算結果やNumPyの配列が表示され、赤い例外メッセージがなければ成功です。
+代入だけを行うセルは、正常でも何も表示しない場合があります。
+\end{successbox}
+
+\section{セル操作を正しく理解する}
+
+\subsection{実行順序が重要な理由}
+
+ノートブックでは、前のセルで作った変数や読み込んだライブラリを後のセルで使います。
+たとえば、先に\texttt{import numpy as np}を実行しなければ、
+後のセルで\texttt{np.array(...)}を使えません。
+
+\begin{pointbox}
+初めて開いたノートブックは、必ず一番上から順に実行してください。
+途中だけ実行してエラーが出たときも、まず上から実行し直します。
+\end{pointbox}
+
+\subsection{よく使う実行操作}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.27\textwidth}
+                  >{\raggedright\arraybackslash}p{0.25\textwidth}
+                  >{\raggedright\arraybackslash}p{0.39\textwidth}}
+\toprule
+操作 & キーまたはメニュー & 用途\\
+\midrule
+\endfirsthead
+\toprule
+操作 & キーまたはメニュー & 用途\\
+\midrule
+\endhead
+実行して次へ &
+\keycap{Shift + Enter} &
+通常の学習で最もよく使う。\\
+実行して移動しない &
+\keycap{Ctrl + Enter} &
+同じセルを修正しながら繰り返す。macOSでは環境によりCommandキーを使う。\\
+実行して下にセル追加 &
+\keycap{Alt + Enter} &
+試しのコードを続けて書きたいとき。\\
+全セル実行 &
+\menu{Run} $\rightarrow$ \menu{Run All Cells} &
+先頭から末尾までまとめて実行する。初回は各説明を読みながら個別実行を推奨。\\
+\bottomrule
+\end{longtable}
+
+\subsection{編集モードとコマンドモード}
+
+\begin{description}
+  \item[編集モード] セル内に文字カーソルがあり、コードや文章を入力できる状態。
+  \item[コマンドモード] セル全体を選び、追加・削除・種類変更などを行う状態。
+\end{description}
+
+編集モードからコマンドモードへ戻るには\keycap{Esc}、
+選択したセルを編集するには\keycap{Enter}を押します。
+
+\subsection{セルを誤って変更した場合}
+
+\begin{enumerate}
+  \item 直後なら\menu{Edit}からセル操作の取り消しを選ぶ。
+  \item 元の内容が分からなければ、変更したノートブックを保存せず閉じる。
+  \item それでも戻らなければ、配布元のノートブックを再度ダウンロードまたはアップロードする。
+\end{enumerate}
+
+\section{ノートブックの標準的な進め方}
+
+収録ノートブックでは、次の順序を守ると失敗しにくくなります。
+
+\begin{enumerate}
+  \item タイトルと「このノートブックで学ぶこと」を読む。
+  \item 「環境準備」または「ライブラリの読み込み」セルを実行する。
+  \item 完了メッセージやimportエラーがないことを確認する。
+  \item 説明のMarkdownセルを読む。
+  \item 直後のコードセルを実行する。
+  \item 表、数値、グラフなどの結果と説明を見比べる。
+  \item 練習セルでは、まず自分でコードを書く。
+  \item 必要なら解答例を開き、自分のコードとの違いを確認する。
+  \item 最後に\menu{Kernel}からカーネルを再起動し、
+    \menu{Run All Cells}で先頭から再現できるか確認する。
+\end{enumerate}
+
+\subsection{環境準備セルについて}
+
+多くのPython教材の先頭には、次のようなJupyterLite用処理があります。
+
+\begin{lstlisting}[language=Python]
+import piplite
+await piplite.install(["numpy", "pandas"])
+\end{lstlisting}
+
+\texttt{await}は、パッケージの取得が終わるまで待つために必要です。
+このセルはJupyterLite内でそのまま実行してください。
+
+\subsection{自分でパッケージを追加する場合}
+
+Pyodide対応パッケージであれば、次の方法を試せます。
+
+\begin{lstlisting}[language=Python]
+import piplite
+await piplite.install("package-name")
+\end{lstlisting}
+
+または、ノートブックで次のマジックコマンドを使える場合があります。
+
+\begin{lstlisting}[language=Python]
+%pip install package-name
+\end{lstlisting}
+
+\begin{warningbox}
+通常のPC向けPythonで動くパッケージでも、JupyterLiteでは動かない場合があります。
+OSの機能、外部プログラム、コンパイル済み拡張に強く依存するパッケージは特に注意が必要です。
+\end{warningbox}
+
+\section{保存とバックアップ}
+
+\subsection{ブラウザ内へ保存する}
+
+\begin{enumerate}
+  \item ノートブックのタブが選択されていることを確認する。
+  \item \keycap{Ctrl + S}を押す。macOSでは通常\keycap{Command + S}を使う。
+  \item タブ名付近の未保存を示す印が消えたことを確認する。
+\end{enumerate}
+
+この保存は、現在のブラウザ内に保存する操作です。
+
+\subsection{端末へダウンロードする}
+
+\begin{enumerate}
+  \item 上部の\menu{File}を開く。
+  \item \menu{Save and Export Notebook As}に相当する項目を選ぶ。
+  \item \menu{Notebook (.ipynb)}を選ぶ。
+  \item ブラウザのダウンロード完了表示を確認する。
+  \item ファイルを準備した\filepath{jupyterlite-work}フォルダーへ移す。
+\end{enumerate}
+
+UIの版によっては、左側のファイル名を右クリックし、
+\menu{Download}を選ぶ方法も利用できます。
+
+\subsection{ファイル名の付け方}
+
+元教材と区別できる名前を付けます。たとえば、
+
+\begin{center}
+  \filepath{pandas_beginner_tutorial_kawai_20260830.ipynb}
+\end{center}
+
+のように、元の名前、利用者名、日付を含めると整理しやすくなります。
+
+\subsection{保存済みノートブックをアップロードする}
+
+\begin{enumerate}
+  \item JupyterLiteの左側で、置きたいフォルダーを開く。
+  \item ファイルブラウザー上部のUploadボタンを選ぶ。
+  \item 手元の\texttt{.ipynb}ファイルを選択する。
+  \item 同名ファイルの上書き確認が出た場合は、内容を確認して選択する。
+  \item アップロード後のファイルをダブルクリックして開く。
+\end{enumerate}
+
+環境によっては、ファイルをブラウザーへドラッグ＆ドロップすることもできます。
+
+\begin{warningbox}[上書き前の確認]
+同じ名前の教材へ上書きすると、元の状態へ戻しにくくなります。
+自分用コピーには、元と異なるファイル名を付けてください。
+\end{warningbox}
+
+\section{おすすめの学習順序}
+
+\subsection{入門コース}
+
+初めてPythonを学ぶ方は、次の順序を推奨します。
+
+\begin{enumerate}
+  \item \filepath{intro.ipynb} --- 最小限の操作確認
+  \item \filepath{jupyterlite/jupyterlite_beginner_tutorial_with_exercises_v2.ipynb}
+    --- JupyterとPythonの基本
+  \item \filepath{numpy/numpy_beginner_tutorial.ipynb} --- 配列と計算
+  \item \filepath{pandas/pandas_beginner_tutorial.ipynb} --- 表形式データ
+  \item \filepath{matplotlib/matplotlib_beginner_tutorial.ipynb} --- グラフ
+  \item \filepath{exercises/python_beginner_exercises_34.ipynb} --- 総合練習
+\end{enumerate}
+
+\subsection{データ分析・統計コース}
+
+\begin{enumerate}
+  \item \filepath{pandas/pandas_intermediate_tutorial.ipynb}
+  \item \filepath{scipy/scipy_stats_beginner_tutorial.ipynb}
+  \item \filepath{scipy/scipy_stats_intermediate_tutorial.ipynb}
+  \item \filepath{seaborn/seaborn_beginner_tutorial.ipynb}
+  \item \filepath{statsmodels/statsmodels_jupyterlite_tutorial_v2.ipynb}
+  \item \filepath{exercises/data_analysis_exercises_20.ipynb}
+\end{enumerate}
+
+\subsection{機械学習コース}
+
+\begin{enumerate}
+  \item \filepath{numpy/numpy_intermediate_tutorial.ipynb}
+  \item \filepath{sklearn/sklearn_beginner_tutorial.ipynb}
+  \item \filepath{sklearn/sklearn_intermediate_tutorial.ipynb}
+  \item \filepath{exercises/machine_learning_exercises_20.ipynb}
+  \item \filepath{exercises/python_intermediate_exercises_30.ipynb}
+\end{enumerate}
+
+\subsection{可視化・地図コース}
+
+\begin{enumerate}
+  \item \filepath{matplotlib/matplotlib_beginner_tutorial.ipynb}
+  \item \filepath{seaborn/seaborn_beginner_tutorial.ipynb}
+  \item \filepath{folium/leaflet_folium_jupyterlite_tutorial.ipynb}
+  \item \filepath{folium/leaflet_folium_jupyterlite_tutorial_tokai.ipynb}
+  \item \filepath{exercises/visualization_exercises_15.ipynb}
+  \item \filepath{exercises/geo_visualization_exercises_10.ipynb}
+\end{enumerate}
+
+\section{収録ノートブック一覧}
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.44\textwidth}
+                  >{\raggedright\arraybackslash}p{0.48\textwidth}}
+\toprule
+パス & 主な内容\\
+\midrule
+\endfirsthead
+\toprule
+パス & 主な内容\\
+\midrule
+\endhead
+\multicolumn{2}{l}{\bfseries 入門・基礎}\\
+\filepath{intro.ipynb} & JupyterLiteの最小動作確認\\
+\filepath{jupyterlite/jupyterlite_beginner_tutorial_with_exercises_v2.ipynb}
+  & Jupyter操作、Python入門、演習\\
+\filepath{numpy/numpy_beginner_tutorial.ipynb} & NumPy配列、演算、統計関数\\
+\filepath{pandas/pandas_beginner_tutorial.ipynb} & Series、DataFrame、抽出、絞り込み\\
+\filepath{matplotlib/matplotlib_beginner_tutorial.ipynb} & 基本グラフ\\
+\filepath{seaborn/seaborn_beginner_tutorial.ipynb} & 統計可視化の基本\\
+\filepath{scipy/scipy_stats_beginner_tutorial.ipynb} & 記述統計、確率分布\\
+\filepath{sklearn/sklearn_beginner_tutorial.ipynb} & 前処理、回帰、分類、評価\\
+\filepath{ipywidgets/ipywidgets_beginner_tutorial.ipynb} & 対話ウィジェット\\
+\midrule
+\multicolumn{2}{l}{\bfseries 中級・発展}\\
+\filepath{numpy/numpy_intermediate_tutorial.ipynb} & 線形代数、ブロードキャスト\\
+\filepath{pandas/pandas_intermediate_tutorial.ipynb} & 集計、欠損値、結合、時系列\\
+\filepath{matplotlib/matplotlib_intermediate_tutorial.ipynb} & 複数図、軸、注釈、スタイル\\
+\filepath{seaborn/seaborn_intermediate_tutorial.ipynb} & FacetGrid、PairGrid、クラスターマップ\\
+\filepath{scipy/scipy_stats_intermediate_tutorial.ipynb} & 検定、相関、分散分析\\
+\filepath{sklearn/sklearn_intermediate_tutorial.ipynb} & アンサンブル、調整、クラスタリング\\
+\filepath{statsmodels/statsmodels_jupyterlite_tutorial_v2.ipynb}
+  & 回帰、ロジスティック回帰、時系列\\
+\midrule
+\multicolumn{2}{l}{\bfseries 総合版・特殊トピック}\\
+\filepath{pandas/pandas_jupyterlite_tutorial.ipynb} & pandasの基礎から時系列まで\\
+\filepath{matplotlib/matplotlib_jupyterlite_tutorial.ipynb}
+  & matplotlibの基礎から保存まで\\
+\filepath{folium/leaflet_folium_jupyterlite_tutorial.ipynb} & 地図表示\\
+\filepath{folium/leaflet_folium_jupyterlite_tutorial_tokai.ipynb}
+  & 東海4県のGeoJSON可視化\\
+\filepath{jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb}
+  & Rによる統計検定\\
+\midrule
+\multicolumn{2}{l}{\bfseries 練習問題}\\
+\filepath{exercises/python_beginner_exercises_34.ipynb} & Python初級34題\\
+\filepath{exercises/python_intermediate_exercises_30.ipynb} & Python中級30題\\
+\filepath{exercises/data_analysis_exercises_20.ipynb} & データ分析20題\\
+\filepath{exercises/machine_learning_exercises_20.ipynb} & 機械学習20題\\
+\filepath{exercises/visualization_exercises_15.ipynb} & 可視化15題\\
+\filepath{exercises/geo_visualization_exercises_10.ipynb} & 地理可視化10題\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{教材別の重要な注意}
+
+\subsection{Pythonノートブック}
+
+通常はPython（Pyodide）カーネルが自動で選ばれます。
+カーネル選択画面が表示されたら、PythonまたはPyodideと書かれたものを選びます。
+最初の環境準備セルを省略しないでください。
+
+\subsection{matplotlibと日本語表示}
+
+グラフ内の日本語には\texttt{japanize-matplotlib-jlite}を使用します。
+ノートブック先頭の環境準備とimportセルを実行してからグラフを描いてください。
+
+\begin{errorbox}[日本語が四角や空白になる]
+\begin{enumerate}
+  \item カーネルを再起動する。
+  \item パッケージ準備セルから順に実行する。
+  \item 日本語表示用importセルの後にエラーがないか確認する。
+  \item seabornのスタイル変更後も、教材にある日本語フォント設定セルを実行する。
+\end{enumerate}
+\end{errorbox}
+
+\subsection{FoliumとGeoJSON}
+
+東海版教材では、ノートブックと
+\filepath{tokai4_prefs.geojson}の相対位置が重要です。
+ファイルブラウザーで両方が\filepath{folium}フォルダーにあることを確認してください。
+
+地図の背景タイルは外部通信を利用するため、ネットワーク制限があると白く見える場合があります。
+境界線やマーカーだけ表示される場合も、まず通信状態を確認します。
+
+\subsection{ipywidgets}
+
+スライダーやボタンは、セルの実行後に操作します。
+
+\begin{enumerate}
+  \item 先頭の環境準備セルを実行する。
+  \item widgetを作るセルを実行する。
+  \item 出力欄に表示されたスライダーやボタンを操作する。
+  \item 値の変更に応じて出力が更新されることを確認する。
+\end{enumerate}
+
+widgetを含むノートブックは、通常の数値計算より画面更新に時間がかかる場合があります。
+
+\subsection{Rノートブック}
+
+対象は
+\filepath{jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb}です。
+
+\begin{enumerate}
+  \item ノートブックを開く。
+  \item カーネル選択が表示されたら、Rまたは\texttt{xr}、
+    \texttt{R 4.x}と表示されたカーネルを選ぶ。
+  \item 画面下部がIdleになるまで待つ。
+  \item 最初の\texttt{set.seed(123)}を含むセルから順に実行する。
+  \item t検定、カイ二乗検定、ANOVA、回帰の結果が表示されることを確認する。
+\end{enumerate}
+
+\begin{warningbox}
+RノートブックをPythonカーネルで実行すると、\texttt{<-}などのR構文でエラーになります。
+逆に、PythonノートブックをRカーネルで実行することもできません。
+\end{warningbox}
+
+\section{練習問題の使い方}
+
+\subsection{安全に練習を始める}
+
+\begin{enumerate}
+  \item 練習ノートブックを開く。
+  \item 最初に\menu{File}からコピーを保存するか、ダウンロードして自分用ファイルを作る。
+  \item 環境準備セルを実行する。
+  \item 問題文を読み、解答欄セルへコードを書く。
+  \item \keycap{Shift + Enter}で実行する。
+  \item エラーが出たら、メッセージの最後の行を読む。
+  \item 解答例がある場合は、自分で試した後に比較する。
+\end{enumerate}
+
+\subsection{正解かどうかを確認する観点}
+
+\begin{itemize}
+  \item 指定された値、表、グラフが得られているか。
+  \item 前のセルで偶然作られた変数に依存していないか。
+  \item カーネル再起動後に上から実行しても同じ結果になるか。
+  \item 警告や赤いエラーを無視して先へ進んでいないか。
+\end{itemize}
+
+\section{トラブルシューティング}
+
+\subsection{まず行う共通の復旧手順}
+
+原因が分からないときは、次の順序で試します。
+
+\begin{enumerate}
+  \item 可能なら現在のノートブックをダウンロードして退避する。
+  \item エラーが出たセルの最後の1行を読む。
+  \item そのセルより上に未実行のセルがないか確認する。
+  \item \menu{Kernel} $\rightarrow$ \menu{Restart Kernel}を選ぶ。
+  \item \menu{Run} $\rightarrow$ \menu{Run All Cells}を選ぶ。
+  \item まだ失敗する場合だけ、ブラウザのページを再読み込みする。
+\end{enumerate}
+
+\subsection{NameError}
+
+\texttt{NameError: name 'xxx' is not defined}は、必要な変数やimportがまだ実行されていないときに多く発生します。
+
+\begin{errorbox}
+\begin{enumerate}
+  \item ノートブックの先頭へ戻る。
+  \item 環境準備セルから順に実行する。
+  \item 実行番号が上から自然な順序になっているか確認する。
+\end{enumerate}
+\end{errorbox}
+
+\subsection{ModuleNotFoundError}
+
+必要なパッケージが読み込まれていません。
+
+\begin{enumerate}
+  \item 先頭のパッケージ準備セルを実行したか確認する。
+  \item 通信が切れていないか確認する。
+  \item カーネルを再起動して準備セルを再実行する。
+  \item 自分で追加したパッケージの場合はPyodide対応状況を確認する。
+\end{enumerate}
+
+\subsection{FileNotFoundError}
+
+データファイルが期待された場所にありません。
+
+\begin{enumerate}
+  \item 左側のファイルブラウザーでファイル名を確認する。
+  \item 大文字・小文字、拡張子を確認する。
+  \item ノートブックとデータを元のフォルダー構成に戻す。
+  \item \filepath{data.csv}は\filepath{jupyterlite}、
+    \filepath{tokai4_prefs.geojson}は\filepath{folium}に置く。
+\end{enumerate}
+
+\subsection{セルが\texttt{[*]:}のまま}
+
+\begin{enumerate}
+  \item まず1～2分待つ。初回のパッケージ準備や機械学習は時間がかかる。
+  \item 画面下部がBusyか確認する。
+  \item 長時間変化がなければ\menu{Kernel}からInterruptを試す。
+  \item 反応しなければRestart Kernelを行い、上から再実行する。
+\end{enumerate}
+
+\subsection{グラフが表示されない}
+
+\begin{enumerate}
+  \item \texttt{import matplotlib.pyplot as plt}を実行したか確認する。
+  \item データ作成セルを先に実行したか確認する。
+  \item 教材に\texttt{plt.show()}がある場合は、そのセルまで実行する。
+  \item 出力欄が折りたたまれていないか確認する。
+\end{enumerate}
+
+\subsection{widgetや地図が表示されない}
+
+\begin{enumerate}
+  \item ページの読み込み完了を待つ。
+  \item 環境準備セルを再実行する。
+  \item ノートブックを保存し、カーネルを再起動する。
+  \item ブラウザ拡張機能がスクリプトや外部地図通信を遮断していないか確認する。
+  \item 別の推奨ブラウザで試す。
+\end{enumerate}
+
+\subsection{保存内容が見つからない}
+
+\begin{itemize}
+  \item 前回と同じブラウザ、同じ端末、同じサイトURLを使っているか確認する。
+  \item シークレットモードで作業していなかったか確認する。
+  \item ダウンロードフォルダーに\texttt{.ipynb}のバックアップがないか探す。
+  \item ブラウザデータを削除した後は、ローカルストレージの内容を復元できない場合がある。
+\end{itemize}
+
+\section{データとプライバシー}
+
+JupyterLiteでは、コード実行と多くのデータ処理がブラウザ内で行われます。
+ただし、次の点に注意してください。
+
+\begin{itemize}
+  \item パッケージや地図タイルの取得では外部サイトへ通信する場合がある。
+  \item 教材へ個人情報や機密情報を貼り付けない。
+  \item 共有PCでは作業後にダウンロードしたファイルを回収し、不要なコピーを残さない。
+  \item ノートブックを他人へ渡す前に、出力や入力データに個人情報がないか確認する。
+\end{itemize}
+
+\section{キーボード操作一覧}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.31\textwidth}
+                  >{\raggedright\arraybackslash}p{0.25\textwidth}
+                  >{\raggedright\arraybackslash}p{0.34\textwidth}}
+\toprule
+操作 & キー & 備考\\
+\midrule
+\endfirsthead
+\toprule
+操作 & キー & 備考\\
+\midrule
+\endhead
+セル実行・次へ & \keycap{Shift + Enter} & 基本操作\\
+セル実行・移動なし & \keycap{Ctrl + Enter} & 同じセルを再実行\\
+セル実行・下に追加 & \keycap{Alt + Enter} & 新しい試行を追加\\
+編集モードへ & \keycap{Enter} & コマンドモードから切替\\
+コマンドモードへ & \keycap{Esc} & 編集モードから切替\\
+上にセル追加 & \keycap{A} & コマンドモード\\
+下にセル追加 & \keycap{B} & コマンドモード\\
+コードセルへ & \keycap{Y} & コマンドモード\\
+Markdownセルへ & \keycap{M} & コマンドモード\\
+セル削除 & \keycap{D}を2回 & コマンドモード。誤操作注意\\
+保存 & \keycap{Ctrl + S} & macOSでは通常Command + S\\
+\bottomrule
+\end{longtable}
+
+\section{指導者・管理者向け：ローカル確認}
+
+通常の学習者はこの節を実行する必要はありません。
+教材を更新して公開前に確認する場合の手順です。
+
+\subsection{前提}
+
+\begin{itemize}
+  \item Python 3.11
+  \item \texttt{pip}
+  \item Rカーネルを含める場合は\texttt{micromamba}
+\end{itemize}
+
+\subsection{ビルド}
+
+\begin{lstlisting}[language=bash]
+python -m pip install -r requirements.txt
+jupyter lite build --contents content --output-dir dist
+\end{lstlisting}
+
+\subsection{ローカルプレビュー}
+
+\begin{lstlisting}[language=bash]
+jupyter lite serve --contents content
+\end{lstlisting}
+
+ブラウザで\url{http://localhost:8000}を開き、変更したノートブックを上から実行します。
+生成された\filepath{dist}は公開用ビルド成果物であり、このリポジトリではコミットしません。
+
+\section{用語集}
+
+\begin{description}
+  \item[ノートブック] 説明、コード、結果を1つにまとめた\texttt{.ipynb}ファイル。
+  \item[セル] ノートブック内の説明またはコードの最小単位。
+  \item[カーネル] コードを実際に実行する計算エンジン。
+  \item[Pyodide] WebAssemblyを使い、ブラウザ内でPythonを動かす仕組み。
+  \item[xeus-r] JupyterLiteでRを動かすためのカーネル。
+  \item[ローカルストレージ] Webサイトがブラウザ内へデータを保存する領域。
+  \item[パッケージ] NumPyやpandasなど、追加機能をまとめたライブラリ。
+  \item[Markdown] 見出し、説明、箇条書き、数式などを書く形式。
+\end{description}
+
+\section{学習開始前・終了時チェックリスト}
+
+\subsection{開始前}
+
+\begin{itemize}
+  \item[$\square$] 推奨ブラウザを通常モードで開いた。
+  \item[$\square$] 公開URLが正しい。
+  \item[$\square$] 左側に教材フォルダーが見える。
+  \item[$\square$] 自分用のバックアップフォルダーを用意した。
+  \item[$\square$] Python用かR用か、対象カーネルを確認した。
+\end{itemize}
+
+\subsection{終了時}
+
+\begin{itemize}
+  \item[$\square$] \keycap{Ctrl + S}で保存した。
+  \item[$\square$] 大切なノートブックを\texttt{.ipynb}としてダウンロードした。
+  \item[$\square$] ダウンロードしたファイルを実際に確認した。
+  \item[$\square$] 個人情報や不要な大容量出力が含まれていない。
+  \item[$\square$] 次回どこから始めるかメモした。
+\end{itemize}
+
+\section*{連絡先}
+\addcontentsline{toc}{section}{連絡先}
+
+教材やガイドに関する連絡先は次のとおりです。
+
+\begin{center}
+\begin{tabular}{rl}
+  著者 & 河合勝彦\\
+  所属 & 日本語LuaLaTeX\\
+  電子メール &
+    \href{mailto:kkawai@econ.nagoya-cu.ac.jp}
+    {\nolinkurl{kkawai@econ.nagoya-cu.ac.jp}}\\
+  公開サイト & \siteurl
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{center}
+  \color{GuideGray}\small
+  本ガイドはLuaLaTeXで組版されています。
+\end{center}
+
+\end{document}
