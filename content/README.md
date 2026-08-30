@@ -26,10 +26,14 @@ content/
 ├── python/                        # Python 関連（Pyodide カーネル）
 │   ├── python_beginner_tutorial.ipynb   # Python 文法入門
 │   ├── numpy/  pandas/  matplotlib/     # 基礎ライブラリ（beginner / intermediate / complete）
-│   ├── seaborn/  scipy/  statsmodels/   # データ分析・統計
+│   ├── seaborn/  scipy/  statsmodels/   # データ分析・統計（scipy: 最適化、statsmodels: パネルデータも）
 │   ├── sklearn/                         # 機械学習
-│   ├── folium/                          # 地図可視化（tokai4_prefs.geojson 付き）
-│   └── ipywidgets/                      # インタラクティブなウィジェット
+│   ├── folium/                          # 地図可視化・GeoPandas（tokai4_prefs.geojson 付き）
+│   ├── ipywidgets/                      # インタラクティブなウィジェット
+│   ├── sympy/  duckdb/  openpyxl/  itables/        # 経済数学、SQL、Excel、対話的な表
+│   ├── altair/  plotly/  pyvis/  networkx/         # 対話的グラフ、ネットワーク分析
+│   ├── pingouin/  textmining/                      # 統計検定、日本語テキスト分析
+│   └── mesa/  simpy/                               # シミュレーション（ABM・離散事象）
 ├── r/                             # R 関連（xeus-r カーネル）：R 文法入門・R 統計演習
 └── exercises/                     # 練習問題集（Python）
 ```
@@ -68,6 +72,18 @@ flowchart TD
         K[R 統計テスト演習<br/>xeus-r]
     end
 
+    subgraph 発展ライブラリ
+        L[SymPy<br/>経済数学]
+        M[scipy.optimize<br/>最適化]
+        N[DuckDB<br/>SQL入門]
+        O[NetworkX / pyvis<br/>ネットワーク]
+        Q[GeoPandas<br/>地理空間]
+        S[Altair / Plotly<br/>対話グラフ]
+        T[janome / wordcloud<br/>テキスト分析]
+        V[pingouin / パネルデータ<br/>統計・計量]
+        W[Mesa / SimPy<br/>シミュレーション]
+    end
+
     A --> P & R
     P --> B & C & D
     R --> K
@@ -77,6 +93,12 @@ flowchart TD
     E --> H
     F --> I
     G --> J
+    B --> L & M
+    C --> N & T
+    D --> S
+    I --> Q
+    O --> W
+    H --> V
 ```
 
 ---
@@ -127,6 +149,36 @@ flowchart TD
 | 1 | `python/matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフの基礎 |
 | 2 | `python/folium/folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
 | 3 | `python/folium/folium_tokai_geojson_tutorial.ipynb` | GeoJSON の活用 |
+| 4 | `python/folium/geopandas_folium_beginner_tutorial.ipynb` | GeoPandas による空間データ処理と地図 |
+
+### 経済数学・最適化コース
+
+| 順番 | ノートブック | 学習内容 |
+|:---:|-------------|----------|
+| 1 | `python/sympy/sympy_beginner_tutorial.ipynb` | 記号計算で学ぶ微分・最適化・余剰（経済数学） |
+| 2 | `python/scipy/scipy_optimize_beginner_tutorial.ipynb` | 数値最適化、線形計画（HiGHS）、整数計画 |
+| 3 | `python/statsmodels/panel_data_beginner_tutorial.ipynb` | パネルデータ：固定効果・変量効果・操作変数 |
+| 4 | `python/pingouin/pingouin_beginner_tutorial.ipynb` | 統計検定を DataFrame で（効果量・検出力付き） |
+
+### データ活用コース（SQL・Excel・対話表示）
+
+| 順番 | ノートブック | 学習内容 |
+|:---:|-------------|----------|
+| 1 | `python/duckdb/duckdb_sql_beginner_tutorial.ipynb` | DuckDB で SQL 入門（DataFrame に直接クエリ） |
+| 2 | `python/openpyxl/openpyxl_xlsxwriter_beginner_tutorial.ipynb` | Excel ファイルの読み書き・書式・グラフ |
+| 3 | `python/itables/itables_beginner_tutorial.ipynb` | DataFrame の対話的表示 |
+| 4 | `python/altair/altair_beginner_tutorial.ipynb` | 宣言的・対話的グラフ（Altair） |
+| 5 | `python/plotly/plotly_beginner_tutorial.ipynb` | 対話的グラフ・アニメーション（Plotly） |
+
+### ネットワーク・シミュレーション・テキスト分析コース
+
+| 順番 | ノートブック | 学習内容 |
+|:---:|-------------|----------|
+| 1 | `python/networkx/networkx_beginner_tutorial.ipynb` | ネットワーク分析（中心性、最短経路、コミュニティ） |
+| 2 | `python/pyvis/pyvis_beginner_tutorial.ipynb` | ネットワークの対話的可視化 |
+| 3 | `python/mesa/mesa_beginner_tutorial.ipynb` | エージェントベースモデル（市場・富の分配） |
+| 4 | `python/simpy/simpy_beginner_tutorial.ipynb` | 離散事象シミュレーション（待ち行列・在庫） |
+| 5 | `python/textmining/janome_wordcloud_beginner_tutorial.ipynb` | 日本語テキスト分析（形態素解析・ワードクラウド・TF-IDF） |
 
 ---
 
@@ -173,6 +225,26 @@ flowchart TD
 | `python/folium/` | `folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
 | `python/folium/` | `folium_tokai_geojson_tutorial.ipynb` | GeoJSON による地域データ可視化 |
 | `r/` | `r_stats_practice.ipynb` | R 統計演習：t 検定、カイ二乗検定、分散分析、回帰分析（xeus-r カーネル用） |
+
+### 発展ライブラリ（応用）
+
+| フォルダ | ファイル | 内容 |
+|---------|---------|------|
+| `python/sympy/` | `sympy_beginner_tutorial.ipynb` | 経済数学：方程式、微分、ラグランジュ乗数法、積分（余剰）、行列 |
+| `python/scipy/` | `scipy_optimize_beginner_tutorial.ipynb` | 最適化：minimize、線形計画（HiGHS）、整数計画、cvxpy |
+| `python/networkx/` | `networkx_beginner_tutorial.ipynb` | ネットワーク分析：中心性、最短経路、コミュニティ検出 |
+| `python/duckdb/` | `duckdb_sql_beginner_tutorial.ipynb` | SQL 入門：SELECT/JOIN/GROUP BY/ウィンドウ関数、sqlite3 との比較 |
+| `python/folium/` | `geopandas_folium_beginner_tutorial.ipynb` | GeoPandas：座標参照系、空間結合、コロプレス図、folium 連携 |
+| `python/altair/` | `altair_beginner_tutorial.ipynb` | Altair：宣言的文法、複合グラフ、選択による対話 |
+| `python/plotly/` | `plotly_beginner_tutorial.ipynb` | Plotly：express / graph_objects、アニメーション、サブプロット |
+| `python/textmining/` | `janome_wordcloud_beginner_tutorial.ipynb` | 日本語テキスト分析：janome、単語頻度、ワードクラウド、TF-IDF |
+| `python/pingouin/` | `pingouin_beginner_tutorial.ipynb` | 統計検定：t 検定、ANOVA、相関、効果量、検出力 |
+| `python/statsmodels/` | `panel_data_beginner_tutorial.ipynb` | パネルデータ計量経済学：固定効果、変量効果、操作変数、DID（statsmodels） |
+| `python/mesa/` | `mesa_beginner_tutorial.ipynb` | エージェントベースモデル（Mesa 3）：富の分配、格子空間、市場モデル |
+| `python/simpy/` | `simpy_beginner_tutorial.ipynb` | 離散事象シミュレーション：待ち行列、資源、在庫 |
+| `python/openpyxl/` | `openpyxl_xlsxwriter_beginner_tutorial.ipynb` | Excel：pandas 連携、書式、数式、グラフ埋め込み |
+| `python/itables/` | `itables_beginner_tutorial.ipynb` | DataFrame の対話的表示（検索・並べ替え） |
+| `python/pyvis/` | `pyvis_beginner_tutorial.ipynb` | ネットワークの対話的可視化（vis.js） |
 
 ### 練習問題
 

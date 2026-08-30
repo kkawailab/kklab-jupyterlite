@@ -28,7 +28,11 @@
 | `python/numpy/` `python/pandas/` `python/matplotlib/` | 基礎ライブラリ（初級・中級） |
 | `python/seaborn/` `python/scipy/` `python/statsmodels/` | データ分析・統計 |
 | `python/sklearn/` | 機械学習 |
-| `python/folium/` `python/ipywidgets/` | 地図可視化・ウィジェット |
+| `python/folium/` `python/ipywidgets/` | 地図可視化（folium・GeoPandas）・ウィジェット |
+| `python/sympy/` `python/scipy/` `python/pingouin/` | 経済数学、最適化、統計検定、パネルデータ（statsmodels） |
+| `python/duckdb/` `python/openpyxl/` `python/itables/` | SQL 入門、Excel、対話的な表 |
+| `python/altair/` `python/plotly/` `python/networkx/` `python/pyvis/` | 対話的グラフ、ネットワーク分析・可視化 |
+| `python/textmining/` `python/mesa/` `python/simpy/` | 日本語テキスト分析、ABM・離散事象シミュレーション |
 | `r/` | R 文法入門・R 統計演習（xeus-r カーネル用） |
 | `exercises/` | 練習問題集（計 129 問） |
 
