@@ -1,6 +1,6 @@
 # JupyterLite サイトのビルド依存
-jupyterlite-core==0.8.0
-jupyterlite-pyodide-kernel==0.8.0
+jupyterlite-core==0.8.3
+jupyterlite-pyodide-kernel==0.8.5
 
 # xeus カーネル対応（environment.yml の xeus-r を組み込む）
 jupyterlite-xeus>=4.3
