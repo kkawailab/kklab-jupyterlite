@@ -23,6 +23,8 @@ JupyterLite のデモサイトにアクセス: https://jupyterlite.github.io/dem
 flowchart TD
     subgraph 入門
         A[JupyterLite入門<br/>基本操作を学ぶ]
+        P[Python文法入門<br/>基本文法を学ぶ]
+        R[R文法入門<br/>R の基本文法を学ぶ]
     end
 
     subgraph 基礎ライブラリ
@@ -41,9 +43,12 @@ flowchart TD
         H[statsmodels<br/>回帰分析]
         I[folium<br/>地図表示]
         J[ipywidgets<br/>インタラクティブ]
+        K[R 統計テスト演習<br/>xeus-r]
     end
 
-    A --> B & C & D
+    A --> P & R
+    P --> B & C & D
+    R --> K
     B --> E
     C --> E & F & G
     D --> F & I & J
@@ -61,10 +66,18 @@ flowchart TD
 | 順番 | ノートブック | 学習内容 | 所要時間目安 |
 |:---:|-------------|----------|:-----------:|
 | 1 | `jupyterlite/jupyterlite_beginner_tutorial_with_exercises_v2.ipynb` | Jupyter の基本操作、Python 入門 | 2時間 |
-| 2 | `numpy/numpy_beginner_tutorial.ipynb` | 配列の作成、演算、統計関数 | 1.5時間 |
-| 3 | `pandas/pandas_beginner_tutorial.ipynb` | DataFrame の基本操作 | 2時間 |
-| 4 | `matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフ作成の基本 | 1.5時間 |
-| 5 | `exercises/python_beginner_exercises_34.ipynb` | 総合練習問題 34題 | 3時間 |
+| 2 | `python/python_beginner_tutorial.ipynb` | ライブラリの読み込み・日本語フォント設定、Python の基本文法（変数、リスト、if、for、関数、ファイル） | 3時間 |
+| 3 | `numpy/numpy_beginner_tutorial.ipynb` | 配列の作成、演算、統計関数 | 1.5時間 |
+| 4 | `pandas/pandas_beginner_tutorial.ipynb` | DataFrame の基本操作 | 2時間 |
+| 5 | `matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフ作成の基本 | 1.5時間 |
+| 6 | `exercises/python_beginner_exercises_34.ipynb` | 総合練習問題 34題 | 3時間 |
+
+### R 入門コース（R カーネル：xeus-r）
+
+| 順番 | ノートブック | 学習内容 | 所要時間目安 |
+|:---:|-------------|----------|:-----------:|
+| 1 | `r/r_beginner_tutorial.ipynb` | R カーネルの使い方・パッケージの制約・グラフ設定、R の基本文法（ベクトル、データフレーム、if、for、関数、ファイル、グラフ） | 3時間 |
+| 2 | `jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb` | t 検定、カイ二乗検定、分散分析、回帰分析 | 1.5時間 |
 
 ### データ分析コース
 
@@ -102,6 +115,8 @@ flowchart TD
 | フォルダ | ファイル | 内容 |
 |---------|---------|------|
 | `jupyterlite/` | `jupyterlite_beginner_tutorial_with_exercises_v2.ipynb` | JupyterLite の基本操作と Python 入門 |
+| `python/` | `python_beginner_tutorial.ipynb` | JupyterLite でのライブラリ読み込み・日本語フォント設定、Python の基本文法（練習問題付き） |
+| `r/` | `r_beginner_tutorial.ipynb` | R カーネル（xeus-r）の使い方、R の基本文法（練習問題付き）※要 R カーネル |
 | `numpy/` | `numpy_beginner_tutorial.ipynb` | 配列の作成、インデックス、演算、統計関数 |
 | `pandas/` | `pandas_beginner_tutorial.ipynb` | Series/DataFrame の基本、選択、フィルタリング |
 | `matplotlib/` | `matplotlib_beginner_tutorial.ipynb` | 折れ線、散布図、棒グラフ、ヒストグラム |
