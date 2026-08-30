@@ -24,12 +24,12 @@
 | ディレクトリ | 内容 |
 |---|---|
 | `jupyterlite/` | JupyterLite の基本操作入門 |
-| `python/` | Python 文法入門（ライブラリ読み込み・日本語フォント設定の解説付き） |
+| `python/` | Python 文法入門（ライブラリ読み込み・日本語フォント設定の解説付き）と、以下のライブラリ別チュートリアル |
+| `python/numpy/` `python/pandas/` `python/matplotlib/` | 基礎ライブラリ（初級・中級） |
+| `python/seaborn/` `python/scipy/` `python/statsmodels/` | データ分析・統計 |
+| `python/sklearn/` | 機械学習 |
+| `python/folium/` `python/ipywidgets/` | 地図可視化・ウィジェット |
 | `r/` | R 文法入門・R 統計演習（xeus-r カーネル用） |
-| `numpy/` `pandas/` `matplotlib/` | 基礎ライブラリ（初級・中級） |
-| `seaborn/` `scipy/` `statsmodels/` | データ分析・統計 |
-| `sklearn/` | 機械学習 |
-| `folium/` `ipywidgets/` | 地図可視化・ウィジェット |
 | `exercises/` | 練習問題集（計 129 問） |
 
 ## カーネル

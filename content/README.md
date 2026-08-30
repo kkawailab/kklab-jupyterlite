@@ -21,16 +21,17 @@ JupyterLite のデモサイトにアクセス: https://jupyterlite.github.io/dem
 
 ```
 content/
-├── intro.ipynb            # 最初に開く動作確認用ノートブック
-├── jupyterlite/           # JupyterLite の基本操作入門（data.csv 付き）
-├── python/                # Python 文法入門
-├── r/                     # R 文法入門・R 統計演習（xeus-r カーネル）
-├── numpy/  pandas/  matplotlib/   # 基礎ライブラリ（beginner / intermediate / complete）
-├── seaborn/  scipy/  statsmodels/ # データ分析・統計
-├── sklearn/               # 機械学習
-├── folium/                # 地図可視化（tokai4_prefs.geojson 付き）
-├── ipywidgets/            # インタラクティブなウィジェット
-└── exercises/             # 練習問題集
+├── intro.ipynb                    # 最初に開く動作確認用ノートブック
+├── jupyterlite/                   # JupyterLite の基本操作入門（data.csv 付き）
+├── python/                        # Python 関連（Pyodide カーネル）
+│   ├── python_beginner_tutorial.ipynb   # Python 文法入門
+│   ├── numpy/  pandas/  matplotlib/     # 基礎ライブラリ（beginner / intermediate / complete）
+│   ├── seaborn/  scipy/  statsmodels/   # データ分析・統計
+│   ├── sklearn/                         # 機械学習
+│   ├── folium/                          # 地図可視化（tokai4_prefs.geojson 付き）
+│   └── ipywidgets/                      # インタラクティブなウィジェット
+├── r/                             # R 関連（xeus-r カーネル）：R 文法入門・R 統計演習
+└── exercises/                     # 練習問題集（Python）
 ```
 
 ファイル名は `<トピック>_<レベル>_tutorial.ipynb` で統一しています。
@@ -88,9 +89,9 @@ flowchart TD
 |:---:|-------------|----------|:-----------:|
 | 1 | `jupyterlite/jupyterlite_beginner_tutorial.ipynb` | Jupyter の基本操作、Python 入門 | 2時間 |
 | 2 | `python/python_beginner_tutorial.ipynb` | ライブラリの読み込み・日本語フォント設定、Python の基本文法（変数、リスト、if、for、関数、ファイル） | 3時間 |
-| 3 | `numpy/numpy_beginner_tutorial.ipynb` | 配列の作成、演算、統計関数 | 1.5時間 |
-| 4 | `pandas/pandas_beginner_tutorial.ipynb` | DataFrame の基本操作 | 2時間 |
-| 5 | `matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフ作成の基本 | 1.5時間 |
+| 3 | `python/numpy/numpy_beginner_tutorial.ipynb` | 配列の作成、演算、統計関数 | 1.5時間 |
+| 4 | `python/pandas/pandas_beginner_tutorial.ipynb` | DataFrame の基本操作 | 2時間 |
+| 5 | `python/matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフ作成の基本 | 1.5時間 |
 | 6 | `exercises/python_beginner_exercises_34.ipynb` | 総合練習問題 34題 | 3時間 |
 
 ### R 入門コース（R カーネル：xeus-r）
@@ -104,28 +105,28 @@ flowchart TD
 
 | 順番 | ノートブック | 学習内容 |
 |:---:|-------------|----------|
-| 1 | `pandas/pandas_intermediate_tutorial.ipynb` | groupby、欠損値、結合、時系列 |
-| 2 | `scipy/scipy_stats_beginner_tutorial.ipynb` | 記述統計、確率分布 |
-| 3 | `scipy/scipy_stats_intermediate_tutorial.ipynb` | 仮説検定、相関分析、ANOVA |
-| 4 | `seaborn/seaborn_beginner_tutorial.ipynb` | 統計的可視化 |
-| 5 | `statsmodels/statsmodels_tutorial.ipynb` | 回帰分析、統計モデリング |
+| 1 | `python/pandas/pandas_intermediate_tutorial.ipynb` | groupby、欠損値、結合、時系列 |
+| 2 | `python/scipy/scipy_stats_beginner_tutorial.ipynb` | 記述統計、確率分布 |
+| 3 | `python/scipy/scipy_stats_intermediate_tutorial.ipynb` | 仮説検定、相関分析、ANOVA |
+| 4 | `python/seaborn/seaborn_beginner_tutorial.ipynb` | 統計的可視化 |
+| 5 | `python/statsmodels/statsmodels_tutorial.ipynb` | 回帰分析、統計モデリング |
 
 ### 機械学習コース
 
 | 順番 | ノートブック | 学習内容 |
 |:---:|-------------|----------|
-| 1 | `numpy/numpy_intermediate_tutorial.ipynb` | 線形代数、ブロードキャスト |
-| 2 | `sklearn/sklearn_beginner_tutorial.ipynb` | 前処理、回帰、分類、評価 |
-| 3 | `sklearn/sklearn_intermediate_tutorial.ipynb` | アンサンブル、チューニング、クラスタリング |
+| 1 | `python/numpy/numpy_intermediate_tutorial.ipynb` | 線形代数、ブロードキャスト |
+| 2 | `python/sklearn/sklearn_beginner_tutorial.ipynb` | 前処理、回帰、分類、評価 |
+| 3 | `python/sklearn/sklearn_intermediate_tutorial.ipynb` | アンサンブル、チューニング、クラスタリング |
 | 4 | `exercises/python_intermediate_exercises_30.ipynb` | 応用練習問題 30題 |
 
 ### 地理データ可視化コース
 
 | 順番 | ノートブック | 学習内容 |
 |:---:|-------------|----------|
-| 1 | `matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフの基礎 |
-| 2 | `folium/folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
-| 3 | `folium/folium_tokai_geojson_tutorial.ipynb` | GeoJSON の活用 |
+| 1 | `python/matplotlib/matplotlib_beginner_tutorial.ipynb` | グラフの基礎 |
+| 2 | `python/folium/folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
+| 3 | `python/folium/folium_tokai_geojson_tutorial.ipynb` | GeoJSON の活用 |
 
 ---
 
@@ -138,39 +139,39 @@ flowchart TD
 | `jupyterlite/` | `jupyterlite_beginner_tutorial.ipynb` | JupyterLite の基本操作と Python 入門 |
 | `python/` | `python_beginner_tutorial.ipynb` | JupyterLite でのライブラリ読み込み・日本語フォント設定、Python の基本文法（練習問題付き） |
 | `r/` | `r_beginner_tutorial.ipynb` | R カーネル（xeus-r）の使い方、R の基本文法（練習問題付き）※要 R カーネル |
-| `numpy/` | `numpy_beginner_tutorial.ipynb` | 配列の作成、インデックス、演算、統計関数 |
-| `pandas/` | `pandas_beginner_tutorial.ipynb` | Series/DataFrame の基本、選択、フィルタリング |
-| `matplotlib/` | `matplotlib_beginner_tutorial.ipynb` | 折れ線、散布図、棒グラフ、ヒストグラム |
-| `seaborn/` | `seaborn_beginner_tutorial.ipynb` | 分布の可視化、カテゴリカルプロット |
-| `scipy/` | `scipy_stats_beginner_tutorial.ipynb` | 記述統計、確率分布、正規分布 |
-| `sklearn/` | `sklearn_beginner_tutorial.ipynb` | 前処理、線形回帰、分類、モデル評価 |
-| `ipywidgets/` | `ipywidgets_beginner_tutorial.ipynb` | スライダー、ボタン、イベント処理 |
+| `python/numpy/` | `numpy_beginner_tutorial.ipynb` | 配列の作成、インデックス、演算、統計関数 |
+| `python/pandas/` | `pandas_beginner_tutorial.ipynb` | Series/DataFrame の基本、選択、フィルタリング |
+| `python/matplotlib/` | `matplotlib_beginner_tutorial.ipynb` | 折れ線、散布図、棒グラフ、ヒストグラム |
+| `python/seaborn/` | `seaborn_beginner_tutorial.ipynb` | 分布の可視化、カテゴリカルプロット |
+| `python/scipy/` | `scipy_stats_beginner_tutorial.ipynb` | 記述統計、確率分布、正規分布 |
+| `python/sklearn/` | `sklearn_beginner_tutorial.ipynb` | 前処理、線形回帰、分類、モデル評価 |
+| `python/ipywidgets/` | `ipywidgets_beginner_tutorial.ipynb` | スライダー、ボタン、イベント処理 |
 
 ### 応用（中級）
 
 | フォルダ | ファイル | 内容 |
 |---------|---------|------|
-| `numpy/` | `numpy_intermediate_tutorial.ipynb` | 線形代数、ブロードキャスト、構造化配列 |
-| `pandas/` | `pandas_intermediate_tutorial.ipynb` | groupby、欠損値処理、結合、時系列 |
-| `matplotlib/` | `matplotlib_intermediate_tutorial.ipynb` | サブプロット、軸設定、注釈 |
-| `seaborn/` | `seaborn_intermediate_tutorial.ipynb` | FacetGrid、PairGrid、クラスターマップ |
-| `scipy/` | `scipy_stats_intermediate_tutorial.ipynb` | 仮説検定、相関分析、分散分析 |
-| `sklearn/` | `sklearn_intermediate_tutorial.ipynb` | アンサンブル学習、ハイパーパラメータ調整 |
-| `statsmodels/` | `statsmodels_tutorial.ipynb` | 回帰分析、ロジスティック回帰、時系列分析 |
+| `python/numpy/` | `numpy_intermediate_tutorial.ipynb` | 線形代数、ブロードキャスト、構造化配列 |
+| `python/pandas/` | `pandas_intermediate_tutorial.ipynb` | groupby、欠損値処理、結合、時系列 |
+| `python/matplotlib/` | `matplotlib_intermediate_tutorial.ipynb` | サブプロット、軸設定、注釈 |
+| `python/seaborn/` | `seaborn_intermediate_tutorial.ipynb` | FacetGrid、PairGrid、クラスターマップ |
+| `python/scipy/` | `scipy_stats_intermediate_tutorial.ipynb` | 仮説検定、相関分析、分散分析 |
+| `python/sklearn/` | `sklearn_intermediate_tutorial.ipynb` | アンサンブル学習、ハイパーパラメータ調整 |
+| `python/statsmodels/` | `statsmodels_tutorial.ipynb` | 回帰分析、ロジスティック回帰、時系列分析 |
 
 ### 総合版（入門〜中級を1冊で）
 
 | フォルダ | ファイル | 内容 |
 |---------|---------|------|
-| `pandas/` | `pandas_complete_tutorial.ipynb` | Series/DataFrame から groupby、結合、時系列まで |
-| `matplotlib/` | `matplotlib_complete_tutorial.ipynb` | 基本グラフからサブプロット、時系列可視化、保存まで |
+| `python/pandas/` | `pandas_complete_tutorial.ipynb` | Series/DataFrame から groupby、結合、時系列まで |
+| `python/matplotlib/` | `matplotlib_complete_tutorial.ipynb` | 基本グラフからサブプロット、時系列可視化、保存まで |
 
 ### 特殊トピック
 
 | フォルダ | ファイル | 内容 |
 |---------|---------|------|
-| `folium/` | `folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
-| `folium/` | `folium_tokai_geojson_tutorial.ipynb` | GeoJSON による地域データ可視化 |
+| `python/folium/` | `folium_beginner_tutorial.ipynb` | 地図表示の基礎 |
+| `python/folium/` | `folium_tokai_geojson_tutorial.ipynb` | GeoJSON による地域データ可視化 |
 | `r/` | `r_stats_practice.ipynb` | R 統計演習：t 検定、カイ二乗検定、分散分析、回帰分析（xeus-r カーネル用） |
 
 ### 練習問題
@@ -189,7 +190,7 @@ flowchart TD
 | フォルダ | ファイル | 内容 |
 |---------|---------|------|
 | `jupyterlite/` | `data.csv` | チュートリアルで使用するサンプルデータ |
-| `folium/` | `tokai4_prefs.geojson` | 東海4県の GeoJSON データ（folium チュートリアル用） |
+| `python/folium/` | `tokai4_prefs.geojson` | 東海4県の GeoJSON データ（folium チュートリアル用） |
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository publishes a browser-only JupyterLite learning site. All user-facing material lives under `content/`: topic folders such as `numpy/`, `pandas/`, and `sklearn/` contain Japanese tutorial notebooks, while `content/exercises/` contains practice sets. Keep supporting data beside the notebooks that use it, as with `content/jupyterlite/data.csv` and `content/folium/tokai4_prefs.geojson`.
+This repository publishes a browser-only JupyterLite learning site. All user-facing material lives under `content/`: `content/python/` holds the Python syntax tutorial plus per-library topic folders such as `python/numpy/`, `python/pandas/`, and `python/sklearn/`; `content/r/` holds the R (xeus-r) notebooks; `content/jupyterlite/` holds the JupyterLite basics tutorial; and `content/exercises/` contains practice sets. Keep supporting data beside the notebooks that use it, as with `content/jupyterlite/data.csv` and `content/python/folium/tokai4_prefs.geojson`.
 
 Build dependencies are pinned in `requirements.txt`. `environment.yml` defines the xeus-r kernel environment. GitHub Pages automation is in `.github/workflows/deploy.yml`; generated `dist/` content is not committed.
 
