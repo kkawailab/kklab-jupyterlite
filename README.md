@@ -23,9 +23,9 @@
 
 | ディレクトリ | 内容 |
 |---|---|
-| `jupyterlite/` | JupyterLite 入門・R カーネル練習 |
+| `jupyterlite/` | JupyterLite の基本操作入門 |
 | `python/` | Python 文法入門（ライブラリ読み込み・日本語フォント設定の解説付き） |
-| `r/` | R 文法入門（xeus-r カーネル用。パッケージ・グラフ設定の解説付き） |
+| `r/` | R 文法入門・R 統計演習（xeus-r カーネル用） |
 | `numpy/` `pandas/` `matplotlib/` | 基礎ライブラリ（初級・中級） |
 | `seaborn/` `scipy/` `statsmodels/` | データ分析・統計 |
 | `sklearn/` | 機械学習 |
@@ -35,7 +35,7 @@
 ## カーネル
 
 - **Python (Pyodide)** — ほとんどのノートブックで使用。`piplite.install()` / `%pip install` でパッケージ追加可
-- **R (xeus-r)** — `r/r_beginner_tutorial.ipynb` と `jupyterlite/jupyterlite_xeus_r_stats_practice.ipynb` 用。`environment.yml` でビルド時に組み込み
+- **R (xeus-r)** — `r/` 配下のノートブック用。`environment.yml` でビルド時に組み込み
 
 ## 仕組み
 
