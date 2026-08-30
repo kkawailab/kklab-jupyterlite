@@ -33,13 +33,13 @@
 | `python/duckdb/` `python/openpyxl/` `python/itables/` | SQL 入門、Excel、対話的な表 |
 | `python/altair/` `python/plotly/` `python/networkx/` `python/pyvis/` | 対話的グラフ、ネットワーク分析・可視化 |
 | `python/textmining/` `python/mesa/` `python/simpy/` | 日本語テキスト分析、ABM・離散事象シミュレーション |
-| `r/` | R 文法入門・R 統計演習（xeus-r カーネル用） |
+| `r/` | R 関連（xeus-r カーネル用）：文法入門・統計演習・統計検定・回帰分析・dplyr/tidyr 前処理・時系列分析 |
 | `exercises/` | 練習問題集（計 129 問） |
 
 ## カーネル
 
 - **Python (Pyodide)** — ほとんどのノートブックで使用。`piplite.install()` / `%pip install` でパッケージ追加可
-- **R (xeus-r)** — `r/` 配下のノートブック用。`environment.yml` でビルド時に組み込み
+- **R (xeus-r)** — `r/` 配下のノートブック用。`environment.yml` でビルド時に組み込み（MASS・dplyr・tidyr・tibble 同梱）
 
 ## 仕組み
 

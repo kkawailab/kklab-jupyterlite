@@ -6,3 +6,8 @@ channels:
   - https://repo.prefix.dev/conda-forge
 dependencies:
   - xeus-r
+  # R チュートリアル用の追加パッケージ（emscripten-forge の wasm ビルド）
+  - r-mass      # 回帰分析入門（ロバスト回帰・負の二項回帰など）
+  - r-dplyr     # データ前処理入門
+  - r-tidyr     # データ前処理入門（pivot_longer / pivot_wider）
+  - r-tibble    # データ前処理入門

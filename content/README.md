@@ -34,7 +34,7 @@ content/
 │   ├── altair/  plotly/  pyvis/  networkx/         # 対話的グラフ、ネットワーク分析
 │   ├── pingouin/  textmining/                      # 統計検定、日本語テキスト分析
 │   └── mesa/  simpy/                               # シミュレーション（ABM・離散事象）
-├── r/                             # R 関連（xeus-r カーネル）：R 文法入門・R 統計演習
+├── r/                             # R 関連（xeus-r カーネル）：文法入門・統計演習・統計検定・回帰分析・dplyr/tidyr・時系列
 └── exercises/                     # 練習問題集（Python）
 ```
 
@@ -72,6 +72,13 @@ flowchart TD
         K[R 統計テスト演習<br/>xeus-r]
     end
 
+    subgraph R発展
+        RA[R 統計検定<br/>t検定・ANOVA]
+        RB[R 回帰分析<br/>lm・glm・MASS]
+        RC[dplyr / tidyr<br/>データ前処理]
+        RD[R 時系列分析<br/>ts・ARIMA]
+    end
+
     subgraph 発展ライブラリ
         L[SymPy<br/>経済数学]
         M[scipy.optimize<br/>最適化]
@@ -86,7 +93,10 @@ flowchart TD
 
     A --> P & R
     P --> B & C & D
-    R --> K
+    R --> K & RC
+    K --> RA
+    RA --> RB
+    RB --> RD
     B --> E
     C --> E & F & G
     D --> F & I & J
@@ -122,6 +132,10 @@ flowchart TD
 |:---:|-------------|----------|:-----------:|
 | 1 | `r/r_beginner_tutorial.ipynb` | R カーネルの使い方・パッケージの制約・グラフ設定、R の基本文法（ベクトル、データフレーム、if、for、関数、ファイル、グラフ） | 3時間 |
 | 2 | `r/r_stats_practice.ipynb` | t 検定、カイ二乗検定、分散分析、回帰分析 | 1.5時間 |
+| 3 | `r/r_stats_tests_beginner_tutorial.ipynb` | 統計検定入門：t 検定・分散/比率の検定・カイ二乗・ANOVA・ノンパラ検定・相関の検定 | 2時間 |
+| 4 | `r/r_regression_beginner_tutorial.ipynb` | 回帰分析入門：lm/glm・診断・ダミー変数・ロジスティック/ポアソン回帰・MASS（ロバスト・負の二項） | 2時間 |
+| 5 | `r/r_dplyr_tidyr_beginner_tutorial.ipynb` | dplyr / tidyr データ前処理：パイプ、group_by、join、pivot、欠損処理 | 2時間 |
+| 6 | `r/r_timeseries_beginner_tutorial.ipynb` | 時系列分析入門：ts・分解・ACF・ARIMA・Holt-Winters・予測 | 2時間 |
 
 ### データ分析コース
 
